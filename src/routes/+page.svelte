@@ -35,7 +35,11 @@
         ]
     }
 
+    let id = "nicedialog";
 </script>
 
 
-<DayInfoCard dateInfo={date}/>
+<main>
+    <button onclick="{id}.showModal()">Open Dialog</button>
+    <DayInfoCard dateInfo={date} chartId={id}/>
+</main>
