@@ -2,6 +2,7 @@
     import { Doughnut } from 'svelte-chartjs';
     import { setChartData } from './DataConfig.js';
     import close_icon from "$lib/assets/icons8-close.svg";
+    import edit_icon from "$lib/assets/icons8-edit-24.png";
 
     export let dateInfo;
     export let chartId;
@@ -22,6 +23,28 @@
       const date = new Date(2000, monthNumber-1, 10);  // 2009-11-10
       const month = date.toLocaleString('default', { month: 'long' });
       return month;
+    }
+
+    let chartOptions = {
+        responsive: true,
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    labelColor: function(context) {
+                        return {
+                            borderColor: 'rgb(0, 0, 255)',
+                            backgroundColor: 'rgb(255, 0, 0)',
+                            borderWidth: 2,
+                            borderDash: [2, 2],
+                            borderRadius: 2,
+                        };
+                    },
+                    labelTextColor: function(context) {
+                        return '#543453';
+                    }
+                }
+            }
+        }
     }
 </script>
 
@@ -93,8 +116,26 @@
     height: max-content;
 
   }
- 
-  
+
+  .dialog-edit {
+    width: 75px;
+    height: 37px;
+    border-radius: 10px;
+    border: none;
+    background-color: #3b73db;
+    color: white;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    font-weight: 500;
+    font-family: "Inter", sans-serif;
+    transition: 200ms;
+  }
+
+  .dialog-edit:hover {
+    background-color: #4f88ef;
+  }
+
 </style>
 
 <dialog id={chartId} >
@@ -106,7 +147,7 @@
 
     <div class="infocard">
       <div class="chart-container">
-        <Doughnut data={setChartData(dateInfo)} options={{ responsive: true }} class="pie"/>
+        <Doughnut data={setChartData(dateInfo)} options={chartOptions} class="pie"/>
       </div>
     
       <div class="info-container">
@@ -116,5 +157,9 @@
 
     </div>
     
+
+    <button class="dialog-edit">
+        Edit Card    
+    </button>
   </div>
 </dialog>

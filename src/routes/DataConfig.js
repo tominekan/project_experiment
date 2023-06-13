@@ -62,6 +62,7 @@ export function setChartData(date)  {
     labels: [""],
     datasets: [
       {
+        label: "Minutes",
         data: [0,],
         backgroundColor: [""],
         hoverBackgroundColor: [""],
